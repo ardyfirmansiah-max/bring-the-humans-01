@@ -99,8 +99,12 @@
     align-items: center;
     gap: 12px 28px;
     margin-top: 28px;
+    padding: 14px 20px;
     font-size: 14px;
     color: var(--secondary);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    width: fit-content;
   }
 
   .stat { display: inline-flex; align-items: baseline; gap: 6px; }
@@ -152,18 +156,31 @@
   }
 
   /* Boarding pass: light paper against the dark canvas, rotated a touch. */
+  .board { position: relative; }
+
+  .board::before {
+    content: "";
+    position: absolute;
+    inset: -40px;
+    background: radial-gradient(closest-side, rgba(196, 28, 131, 0.28), transparent 70%);
+    pointer-events: none;
+  }
+
   .pass {
     position: relative;
-    width: min(520px, 100%);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    width: min(560px, 100%);
     background: var(--paper);
     color: var(--paper-ink);
     border-radius: 20px;
     padding: 28px 32px;
     transform: rotate(-1.5deg);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(196, 28, 131, 0.35);
   }
 
   .pass-head {
+    grid-column: 1 / -1;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -175,15 +192,23 @@
   }
 
   .pass-gate {
-    margin: 20px 0 0;
+    margin: 18px 0 0;
     font-size: 12px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--paper-dim);
   }
 
+  .stub-label {
+    margin: 8px 0 0;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+  }
+
   .pass-code {
-    margin: 6px 0 0;
+    margin: 2px 0 0;
     font-family: var(--font-mono);
     font-size: clamp(34px, 6vw, 52px);
     font-weight: 700;
@@ -192,8 +217,9 @@
   }
 
   .perf {
+    grid-column: 1 / -1;
     position: relative;
-    margin: 24px -32px;
+    margin: 20px -32px;
     border-top: 2px dashed rgba(25, 20, 25, 0.25);
   }
   .perf::before, .perf::after {
@@ -283,6 +309,7 @@
         <span class="stamp" aria-hidden="true">HUMANS WELCOME</span>
         <p class="pass-head" id="pass-title"><span>make.fun</span><span>boarding pass</span></p>
         <p class="pass-gate">Gate 42 · Seat 1A · Destination: payouts</p>
+        <p class="stub-label">Code</p>
         <p class="pass-code">qtp3t61h</p>
         <div class="perf" aria-hidden="true"></div>
         <p class="pass-link-label">Invite link</p>
